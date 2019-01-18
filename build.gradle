@@ -1,0 +1,60 @@
+buildscript {
+  ext.versions = [
+      'androidGradlePlugin': '3.3.0',
+      'androidxAnnotation': '1.0.1',
+      'androidxCore': '1.0.1',
+      'appcompat': '1.0.2',
+      'compileSdk': 28,
+      'coroutines': '1.1.0',
+      'kotlin': '1.3.11',
+      'okio': '2.2.1',
+  ]
+
+  ext.deps = [
+      'androidGradlePlugin': "com.android.tools.build:gradle:$versions.androidGradlePlugin",
+      'androidxCore': "androidx.core:core:$versions.androidxCore",
+      'androidxAnnotation': "androidx.annotation:annotation:$versions.androidxAnnotation",
+      'appcompat': "androidx.appcompat:appcompat:$versions.appcompat",
+      'kotlin': [
+          'coroutines': "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines",
+          'coroutinesAndroid': "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines",
+          'gradlePlugin': "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
+          'stdlibJdk7': "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+      ],
+      'okio': "com.squareup.okio:okio:$versions.okio",
+  ]
+
+  repositories {
+    google()
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath deps.androidGradlePlugin
+    classpath deps.kotlin.gradlePlugin
+  }
+}
+
+allprojects {
+  repositories {
+    google()
+    mavenCentral()
+    jcenter() // Needed for Lint.
+  }
+
+  afterEvaluate { project ->
+    project.configurations.all {
+      resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.version.endsWith('+')) {
+          throw new GradleException(
+              "Wildcard dependency forbidden: ${requested.group}:${requested.name}:${requested.version}")
+        }
+      }
+    }
+  }
+}
+
+task clean(type: Delete) {
+  delete rootProject.buildDir
+}

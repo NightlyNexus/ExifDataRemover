@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+  compileSdkVersion versions.compileSdk
+
+  defaultConfig {
+    applicationId "com.nightlynexus.exifdataremover"
+    minSdkVersion 23
+    targetSdkVersion 28
+    versionCode 1
+    versionName "1.0"
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  lintOptions {
+    abortOnError true
+    warningsAsErrors true
+    lintConfig rootProject.file('lint.xml')
+    textReport true
+    textOutput 'stdout'
+    htmlReport true
+    htmlOutput rootProject.file("lint-reports/${name}.html")
+    // We run a full lint analysis as build part in CI, so skip vital checks for assemble tasks.
+    checkReleaseBuilds false
+  }
+
+  buildTypes {
+    debug {
+      applicationIdSuffix '.debug'
+      signingConfig signingConfigs.debug
+    }
+  }
+}
+
+dependencies {
+  implementation deps.androidxAnnotation
+  implementation deps.androidxCore
+  implementation deps.appcompat
+  implementation deps.kotlin.coroutines
+  implementation deps.kotlin.coroutinesAndroid
+  implementation deps.kotlin.stdlibJdk7
+  implementation deps.okio
+}

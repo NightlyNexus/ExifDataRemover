@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity"
+    >
+  <com.nightlynexus.exifdataremover.ExtendedToolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?actionBarSize"
+      android:background="@color/toolbar_background"
+      app:title="@string/toolbar_title"
+      />
+  <TextView
+      android:id="@+id/button"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@drawable/select_button_background"
+      android:gravity="center"
+      android:text="@string/select_button_text"
+      android:textColor="@color/select_button_text"
+      android:textSize="@dimen/select_button_text"
+      />
+</LinearLayout>

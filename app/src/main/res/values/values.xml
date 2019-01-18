@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="color_primary">#FFFFFF</color>
+  <color name="select_button_ripple">#DADADA</color>
+  <color name="select_button_text">#FFFFFF</color>
+  <color name="toolbar_background">@color/color_primary</color>
+  <color name="window_background">#000000</color>
+
+  <dimen name="select_button_text">48sp</dimen>
+
+  <string name="app_name">Exif Data Remover</string>
+  <string name="failed_to_create">Failed: %1$s</string>
+  <string name="menu_delete_all">Delete Exif Data Remover directory and all its contents</string>
+  <string name="only_jpeg">Only JPEGs are supported currently</string>
+  <string name="select_button_text">Select image</string>
+  <string name="toolbar_title">@string/app_name</string>
+
+  <style name="Theme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowBackground">@color/window_background</item>
+    <item name="android:windowTranslucentStatus">true</item>
+    <item name="colorPrimary">@color/color_primary</item>
+  </style>
+</resources>
