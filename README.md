@@ -1,7 +1,7 @@
 Exif Data Remover
 =====================
 
-Removes EXIF data from JPEGs
+Removes EXIF data from JPEGs</br>https://www.media.mit.edu/pia/Research/deepview/exif.html
 
 ![](images/selection.jpg) ![](images/result.jpg)
 
