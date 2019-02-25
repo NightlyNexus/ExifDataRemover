@@ -48,13 +48,19 @@ class Activity : AppCompatActivity(), CoroutineScope {
     val button = findViewById<View>(R.id.button)
     toolbar.inflateMenu(R.menu.toolbar)
     toolbar.setOnMenuItemClickListener {
-      if (checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PERMISSION_GRANTED
-      ) {
-        deleteAll()
-      } else {
-        requestPermissions(arrayOf(WRITE_EXTERNAL_STORAGE), 2)
+      val itemId = it.itemId
+      when (itemId) {
+        R.id.menu_delete_all -> {
+          if (checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PERMISSION_GRANTED
+          ) {
+            deleteAll()
+          } else {
+            requestPermissions(arrayOf(WRITE_EXTERNAL_STORAGE), 2)
+          }
+          true
+        }
+        else -> throw AssertionError("itemId == $itemId")
       }
-      true
     }
     button.setOnClickListener {
       if (checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PERMISSION_GRANTED
