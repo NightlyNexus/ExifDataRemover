@@ -1,37 +1,39 @@
 buildscript {
   ext.versions = [
-      'androidGradlePlugin': '3.3.0',
-      'androidxAnnotation': '1.0.1',
-      'androidxCore': '1.0.1',
-      'appcompat': '1.0.2',
-      'compileSdk': 28,
-      'coroutines': '1.1.0',
-      'kotlin': '1.3.11',
-      'okio': '2.2.1',
+      'androidGradlePlugin': '4.1.2',
+      'compileSdk': 30,
+      'coroutines': '1.4.3',
+      'kotlin': '1.4.31',
+      'leakcanary': '2.6',
+      'okio': '2.10.0',
+      'supportLibrary': '1.1.0',
   ]
 
   ext.deps = [
       'androidGradlePlugin': "com.android.tools.build:gradle:$versions.androidGradlePlugin",
-      'androidxCore': "androidx.core:core:$versions.androidxCore",
-      'androidxAnnotation': "androidx.annotation:annotation:$versions.androidxAnnotation",
-      'appcompat': "androidx.appcompat:appcompat:$versions.appcompat",
       'kotlin': [
           'coroutines': "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines",
           'coroutinesAndroid': "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines",
           'gradlePlugin': "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
           'stdlibJdk7': "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
       ],
+      'leakcanary': "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary",
       'okio': "com.squareup.okio:okio:$versions.okio",
+      'supportLibrary': [
+          'annotations': "androidx.annotation:annotation:$versions.supportLibrary",
+          'appCompat': "androidx.appcompat:appcompat:$versions.supportLibrary",
+      ]
   ]
-
-  repositories {
-    google()
-    mavenCentral()
-  }
 
   dependencies {
     classpath deps.androidGradlePlugin
     classpath deps.kotlin.gradlePlugin
+  }
+
+  repositories {
+    google()
+    mavenCentral()
+    maven { url 'https://plugins.gradle.org/m2/' }
   }
 }
 
@@ -39,7 +41,7 @@ allprojects {
   repositories {
     google()
     mavenCentral()
-    jcenter() // Needed for Lint.
+    jcenter() // Needed for lint.
   }
 
   afterEvaluate { project ->
@@ -53,8 +55,4 @@ allprojects {
       }
     }
   }
-}
-
-task clean(type: Delete) {
-  delete rootProject.buildDir
 }
