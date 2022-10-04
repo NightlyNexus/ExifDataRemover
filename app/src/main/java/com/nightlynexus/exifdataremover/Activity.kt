@@ -139,7 +139,7 @@ class Activity : AppCompatActivity() {
           if (copyWithoutExifData(source, sink)) {
             values.clear()
             values.put(MediaStore.Images.Media.IS_PENDING, 0)
-            contentResolver.update(sinkUri, values, null)
+            contentResolver.update(sinkUri, values, null, null)
             withContext(Dispatchers.Main) {
               startActivity(
                 Intent(
