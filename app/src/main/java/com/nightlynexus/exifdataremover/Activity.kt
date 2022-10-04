@@ -1,6 +1,7 @@
 package com.nightlynexus.exifdataremover
 
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
 import android.content.Intent.ACTION_PICK
@@ -75,6 +76,7 @@ class Activity : AppCompatActivity() {
     permissions: Array<String>,
     grantResults: IntArray
   ) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     if (grantResults[0] == PERMISSION_GRANTED) {
       when (requestCode) {
         1 -> {
@@ -129,8 +131,10 @@ class Activity : AppCompatActivity() {
           put(MediaStore.Images.Media.IS_PENDING, 1)
         }
         try {
+          @SuppressLint("Recycle") // Handled in copyWithoutExifData.
           val source = contentResolver.openInputStream(sourceUri)!!.source().buffer()
           val sinkUri = contentResolver.insert(EXTERNAL_CONTENT_URI, values)!!
+          @SuppressLint("Recycle") // Handled in copyWithoutExifData.
           val sink = contentResolver.openOutputStream(sinkUri)!!.sink().buffer()
           if (copyWithoutExifData(source, sink)) {
             values.clear()
@@ -166,6 +170,7 @@ class Activity : AppCompatActivity() {
         parent.mkdirs()
         val output = File(parent, fileName)
         try {
+          @SuppressLint("Recycle") // Handled in copyWithoutExifData.
           val source = contentResolver.openInputStream(sourceUri)!!.source().buffer()
           if (copyWithoutExifData(source, output.sink().buffer())) {
             MediaScannerConnection.scanFile(
