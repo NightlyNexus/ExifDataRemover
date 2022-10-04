@@ -42,7 +42,7 @@ dependencies {
   implementation deps.kotlin.coroutines
   implementation deps.kotlin.coroutinesAndroid
   implementation deps.okio
-  implementation deps.supportLibrary.annotations
-  implementation deps.supportLibrary.appCompat
+  implementation deps.androidAnnotations
+  implementation deps.appcompat
   debugImplementation deps.leakcanary
 }

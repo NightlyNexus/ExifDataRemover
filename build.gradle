@@ -1,16 +1,19 @@
 buildscript {
   ext.versions = [
+      'androidAnnotations': '1.5.0',
       'androidGradlePlugin': '7.3.0',
+      'appcompat': '1.5.1',
       'compileSdk': 33,
-      'coroutines': '1.4.3',
-      'kotlin': '1.4.31',
-      'leakcanary': '2.6',
-      'okio': '2.10.0',
-      'supportLibrary': '1.1.0',
+      'coroutines': '1.6.4',
+      'kotlin': '1.7.20',
+      'leakcanary': '2.9.1',
+      'okio': '3.2.0'
   ]
 
   ext.deps = [
+      'androidAnnotations': "androidx.annotation:annotation:$versions.androidAnnotations",
       'androidGradlePlugin': "com.android.tools.build:gradle:$versions.androidGradlePlugin",
+      'appcompat': "androidx.appcompat:appcompat:$versions.appcompat",
       'kotlin': [
           'coroutines': "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines",
           'coroutinesAndroid': "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines",
@@ -18,11 +21,7 @@ buildscript {
           'stdlibJdk7': "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
       ],
       'leakcanary': "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary",
-      'okio': "com.squareup.okio:okio:$versions.okio",
-      'supportLibrary': [
-          'annotations': "androidx.annotation:annotation:$versions.supportLibrary",
-          'appCompat': "androidx.appcompat:appcompat:$versions.supportLibrary",
-      ]
+      'okio': "com.squareup.okio:okio:$versions.okio"
   ]
 
   dependencies {
@@ -41,7 +40,6 @@ allprojects {
   repositories {
     google()
     mavenCentral()
-    jcenter() // Needed for lint.
   }
 
   afterEvaluate { project ->
