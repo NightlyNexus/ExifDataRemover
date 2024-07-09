@@ -10,7 +10,7 @@
   <!-- TODO: Remove: https://issuetracker.google.com/issues/63610357 -->
   <issue id="MissingRegistered" severity="error" />
   <!-- TODO: Remove: https://issuetracker.google.com/issues/63610357 -->
-  <issue id="Registered" severity="error" />
+  <issue id="Registered" severity="fatal" />
   <issue id="StopShip" severity="error" />
   <issue id="TypographyQuotes" severity="error" />
 </lint>
