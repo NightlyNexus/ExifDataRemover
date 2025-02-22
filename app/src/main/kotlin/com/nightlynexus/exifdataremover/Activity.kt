@@ -95,7 +95,9 @@ class Activity : AppCompatActivity() {
   }
 
   private fun startImagePickerForResult() {
-    startActivityForResult(Intent(ACTION_PICK, EXTERNAL_CONTENT_URI), 1)
+    val intent = Intent(ACTION_PICK)
+    intent.setDataAndType(EXTERNAL_CONTENT_URI, "image/jpeg")
+    startActivityForResult(intent, 1)
   }
 
   private fun deleteAll() {
